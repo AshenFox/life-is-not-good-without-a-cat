@@ -124,7 +124,14 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: ["file-loader"],
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "img",
+            esModule: false,
+          },
+        },
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
