@@ -1,0 +1,14 @@
+.header {
+  font-family: "Exo 2", sans-serif;
+  margin-bottom: 2.4rem;
+  text-align: center;
+
+  @media (max-width: $tablet) {
+    margin-top: 2.4rem;
+  }
+
+  h1 {
+    font-size: 3.6rem;
+    font-weight: 100;
+  }
+}

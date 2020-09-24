@@ -1,0 +1,17 @@
+.food-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 1120px;
+  min-height: 53rem;
+
+  @media (max-width: $tablet) {
+    width: 720px;
+  }
+
+  @media (max-width: $mobile) {
+    justify-content: space-around;
+    width: 320px;
+  }
+}
