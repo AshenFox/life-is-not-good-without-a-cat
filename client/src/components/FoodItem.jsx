@@ -1,33 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggleItem } from "../actions/mainActions";
+import { toggleItem, toggleHover } from "../actions/mainActions";
 import FoodItemContents from "./FoodItemContents";
 import FoodItemStatus from "./FoodItemStatus";
+import FoodSubtitle from "./FoodSubtitle";
 
-const FoodItem = ({ item, main, toggleItem }) => {
+const FoodItem = ({ item, main, toggleItem, toggleHover }) => {
   const { bucket } = main;
-  const { _id, description, flavor, isInStock, weight, benefits } = item;
+  const {
+    _id,
+    description,
+    flavor,
+    isInStock,
+    weight,
+    benefits,
+    isHover,
+  } = item;
+
+  useEffect(() => {
+    if (!isChosen && isHover) toggleHover(_id);
+  });
 
   const onClick = (e) => {
     if (!isInStock) return;
     toggleItem(_id);
   };
 
+  const onMouseLeave = (e) => {
+    if (isChosen && !isHover) toggleHover(_id);
+  };
+
   let isChosen = bucket[_id];
 
   return (
     <div
-      className={`food-item ${isInStock ? "" : "inactive"}${
-        isChosen ? "selected" : ""
-      }`}
+      className={`food-item${isInStock ? "" : " inactive"}${
+        isChosen ? " selected" : ""
+      }${isHover ? " hover" : ""}`}
     >
-      <div className='food-item__body-container' onClick={onClick}>
+      <div
+        className='food-item__body-container'
+        onClick={onClick}
+        onMouseLeave={onMouseLeave}
+      >
         <div className='food-item__body'>
-          <h4 className='food-item__subtitle'>Сказочное заморское яство</h4>
+          <FoodSubtitle isHover={isHover} />
           <h2 className='food-item__title'>Нямушка</h2>
           <span className='food-item__description'>с {flavor}</span>
-          <FoodItemContents benefits={benefits}></FoodItemContents>
+          <FoodItemContents benefits={benefits} />
           <div className='food-item__weight'>
             <span className='food-item__weight-value'>
               {`${weight}`.replace(".", ",")}
@@ -37,10 +58,11 @@ const FoodItem = ({ item, main, toggleItem }) => {
         </div>
       </div>
       <FoodItemStatus
-        isInStock
+        isInStock={isInStock}
+        flavor={flavor}
         description={description}
         clickHandler={onClick}
-      ></FoodItemStatus>
+      />
     </div>
   );
 };
@@ -55,6 +77,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   toggleItem,
+  toggleHover,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodItem);

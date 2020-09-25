@@ -9,13 +9,22 @@ const Food = require("../models/Food");
 
 router.get("/", async (req, res) => {
   try {
-    let foodItems = await Food.find({});
+    let db_response = await Food.find({});
 
-    if (foodItems.length) {
-      res.status(200).json(foodItems);
-    } else {
+    if (!db_response.length) {
       res.status(200).json({ msg: "None items found" });
+      return;
     }
+
+    let foodItems = {};
+
+    for (let item of db_response) {
+      foodItems[item._id] = item;
+    }
+
+    console.log(foodItems);
+
+    res.status(200).json(foodItems);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

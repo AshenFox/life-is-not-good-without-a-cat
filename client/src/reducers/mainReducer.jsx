@@ -1,4 +1,4 @@
-import { GET_FOOD_ITEMS, TOGGLE_ITEM } from "../actions/types";
+import { GET_FOOD_ITEMS, TOGGLE_ITEM, TOGGLE_HOVER } from "../actions/types";
 import initialState from "./mainInitState";
 
 export default (state = initialState, action) => {
@@ -6,13 +6,23 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case TOGGLE_ITEM:
-      const { id } = payload;
-      const oldBucket = state.bucket;
       return {
         ...state,
         bucket: {
-          ...oldBucket,
-          [id]: !oldBucket[id],
+          ...state.bucket,
+          [payload.id]: !state.bucket[payload.id],
+        },
+      };
+
+    case TOGGLE_HOVER:
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [payload.id]: {
+            ...state.items[payload.id],
+            isHover: !state.items[payload.id].isHover,
+          },
         },
       };
 
@@ -26,3 +36,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+// let recipeMap = [{ cucumber: 500 }, { tomatoes: 350 }, { onion: 50 }];

@@ -11,12 +11,14 @@ const FoodContainer = ({ main, getFoodItems }) => {
     getFoodItems();
   }, []);
 
+  let foodItemsArr = Object.values(items);
+
   return (
     <div className='food-container'>
-      {!items.length ? (
+      {!foodItemsArr.length ? (
         <div className='spinner' />
       ) : (
-        items.map((item) => <FoodItem key={item._id} item={item} />)
+        foodItemsArr.map((item) => <FoodItem key={item._id} item={item} />)
       )}
     </div>
   );

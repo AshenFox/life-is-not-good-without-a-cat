@@ -1,9 +1,18 @@
-import { GET_FOOD_ITEMS, TOGGLE_ITEM } from "./types";
+import { GET_FOOD_ITEMS, TOGGLE_HOVER, TOGGLE_ITEM } from "./types";
 
 // add/remove item from bucket
 
 export const toggleItem = (id) => ({
   type: TOGGLE_ITEM,
+  payload: {
+    id,
+  },
+});
+
+// toggle hover on item
+
+export const toggleHover = (id) => ({
+  type: TOGGLE_HOVER,
   payload: {
     id,
   },
@@ -23,7 +32,7 @@ export const getFoodItems = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.err(err);
+    console.error(err);
   }
 };
 

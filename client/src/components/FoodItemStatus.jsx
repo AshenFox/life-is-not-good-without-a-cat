@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FoodItemStatus = ({ isInStock, description, clickHandler }) => {
+const FoodItemStatus = ({ isInStock, description, clickHandler, flavor }) => {
   return (
     <div className='food-item__status'>
       {isInStock ? (

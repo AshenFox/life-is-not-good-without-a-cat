@@ -48,11 +48,30 @@
   }
 
   &__subtitle {
+    position: relative;
     margin-top: 2.1rem;
 
     color: $grey;
     line-height: 1.9rem;
+    height: 1.9rem;
     font-weight: normal;
+
+    p {
+      left: 0;
+      position: absolute;
+      transition: $ease-transition;
+    }
+
+    &--1 {
+      opacity: 1;
+      top: 0px;
+    }
+
+    &--2 {
+      color: $red;
+      opacity: 0;
+      top: -10px;
+    }
   }
 
   &__title {
@@ -189,6 +208,26 @@
 
       &__status {
         color: $yellow;
+      }
+    }
+  }
+
+  &.hover {
+    .food-item {
+      &__body-container:hover {
+        .food-item {
+          &__subtitle {
+            &--1 {
+              opacity: 0;
+              top: 10px;
+            }
+
+            &--2 {
+              opacity: 1;
+              top: 0;
+            }
+          }
+        }
       }
     }
   }
