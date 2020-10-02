@@ -22,8 +22,6 @@ router.get("/", async (req, res) => {
       foodItems[item._id] = item;
     }
 
-    console.log(foodItems);
-
     res.status(200).json(foodItems);
   } catch (err) {
     console.error(err.message);

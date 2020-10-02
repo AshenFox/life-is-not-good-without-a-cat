@@ -55,7 +55,9 @@ const FoodItem = ({ item, main, toggleItem, toggleHover }) => {
             </span>
             <span className='food-item__weight-units'>кг</span>
           </div>
+          <div className='food-item__body-background' />
         </div>
+        <div className='food-item__body-mask'></div>
       </div>
       <FoodItemStatus
         isInStock={isInStock}

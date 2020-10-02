@@ -1,0 +1,8 @@
+@mixin pseudo_template {
+  content: "";
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  transform: rotate(45deg);
+  top: 0;
+}
